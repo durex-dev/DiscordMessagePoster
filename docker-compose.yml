@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  discord-message-poster:
+    container_name: discord_message_poster
+    build:
+      context: .
+    restart: always
+    ports:
+      - "0.0.0.0:85:80"
+      - "0.0.0.0:445:443"
+    volumes:
+      - .:/discord-message-poster
+    env_file: .env
+    networks:
+      - discord-message-poster-network
+    environment:
+      - TZ=Europe/Moscow
+
+networks:
+  discord-message-poster-network:
+    driver: bridge
